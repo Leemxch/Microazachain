@@ -30,6 +30,9 @@ class MicroTarea:
         return self.archivos
     def setArchivos(archivos):
         self.archivos = archivos
+    def toString(self):
+        print(self.nombre, self.empresa, self.descripcion, self.criterios,
+              self.recompensa, self.archivos)
     
 
 class Node:

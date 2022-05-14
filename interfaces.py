@@ -1,12 +1,17 @@
 import tkinter as tk
-from tkinter import ttk
 from functools import partial
+from BlockChain import *
 
 size = 30
 
-def test(wii):
-    for i in wii:
-        print (i.get())
+def createMicroTask(task):
+    microTarea = MicroTarea(task[0].get(),
+                            task[1].get(),
+                            task[2].get(),
+                            task[3].get(),
+                            task[4].get(),
+                            task[5].get())
+    microTarea.toString()
 
 def start():
     # Main screen
@@ -48,12 +53,12 @@ def start():
 
     #Buttons
     publicarMicro = tk.Button(screen, text = "Publicar")
-    publicarMicro.config(command = partial(test, [microNombreEntry,
-                                                  microEmpresaEntry,
-                                                  microDescripcionEntry,
-                                                  microCriteriosEntry,
-                                                  microRecompensaEntry,
-                                                  microArchivosEntry]))
+    publicarMicro.config(command = partial(createMicroTask, [microNombreEntry,
+                                                             microEmpresaEntry,
+                                                             microDescripcionEntry,
+                                                             microCriteriosEntry,
+                                                             microRecompensaEntry,
+                                                             microArchivosEntry]))
     publicarMicro.place(x = 5 * size, y = 350)
 
 
