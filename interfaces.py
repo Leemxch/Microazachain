@@ -5,13 +5,13 @@ from logic import *
 
 size = 30
 
-def showHide(show, hide, state = 0):
+
+def showHide(show, hide, state=0):
     if state == 1:
         hide.withdraw()
-        show.deiconofy()
+        show.deiconify()
     show.withdraw()
-    hide.deiconofy()
-
+    hide.deiconify()
 
 
 def seleccionar(lista, mainScreen):
@@ -23,7 +23,7 @@ def seleccionar(lista, mainScreen):
     seleccionar.resizable(False, False)
 
     # Labels
-    titleLabel = tk.Label(seleccionar, text="Agregar una nueva microtarea")
+    titleLabel = tk.Label(seleccionar, text="Buscar una microtarea")
     titleLabel.place(x=30 * (int(size / 2)), y=10)
 
     agregarNombreLabel = tk.Label(seleccionar, text="Nombre")
@@ -45,18 +45,22 @@ def seleccionar(lista, mainScreen):
                 agregarCriteriosLabel,
                 agregarRecompensaLabel,
                 agregarArchivosLabel]
-    #Button
+    # Button
     anterior = tk.Button(seleccionar, text="Anterior")
-    anterior.config(command = partial(print))
+    anterior.config(command=partial(print))
     anterior.place(x=5 * size, y=350)
 
     siguiente = tk.Button(seleccionar, text="Siguiente")
-    siguiente.config(command=partial(mostrarSiguiente,agregar,conjunto))
+    siguiente.config(command=partial(mostrarSiguiente, agregar, conjunto))
     siguiente.place(x=10 * size, y=350)
 
     reclamar = tk.Button(seleccionar, text="Reclamar")
     reclamar.config(command=partial(print))
     reclamar.place(x=15 * size, y=350)
+
+    volverMainSel = tk.Button(seleccionar, text="Volver")
+    volverMainSel.place(x=5 * size, y=25 * size)
+    volverMainSel.config(command=partial(showHide, seleccionar, mainScreen, 1))
 
     seleccionar.mainloop()
 
@@ -112,34 +116,37 @@ def agregar(lista, mainScreen):
                                          lista,
                                          prosumer))
     publicarMicro.place(x=5 * size, y=350)
+    volverMain = tk.Button(agregar, text="Volver")
+    volverMain.place(x=5 * size, y=25*size)
+    volverMain.config(command=partial(showHide, agregar, mainScreen, 1))
+
     agregar.mainloop()
+
 
 def start():
     listaEnlazada = ListaEnlazadaDoble()
     listaEnlazada.insertar_inicio(
-        MicroTarea("Genesis","Genesis","Genesis","Genesis","Genesis","Genesis"),
+        MicroTarea("Genesis", "Genesis", "Genesis", "Genesis", "Genesis", "Genesis"),
         "Genesis",
         "Genesis"
     )
     # Main screen
     screen = tk.Tk()
-    screen.title("Blockchain en micro tareas") #TODO
-    screen.geometry(str(290+25*size) + "x" + str(70+25*size))
+    screen.title("Blockchain en micro tareas")  # TODO
+    screen.geometry(str(290 + 25 * size) + "x" + str(70 + 25 * size))
     screen.resizable(False, False)
 
-    #Labels
-    titleLabel = tk.Label(screen, text = "Inicio")
-    titleLabel.place(x=30*(int(size/2)), y=10)
+    # Labels
+    titleLabel = tk.Label(screen, text="Inicio")
+    titleLabel.place(x=30 * (int(size / 2)), y=10)
 
+    # Buttons
+    seleccionarButton = tk.Button(screen, text="Seleccionar una micro tarea")
+    seleccionarButton.config(command=partial(seleccionar, listaEnlazada, screen))
+    seleccionarButton.place(x=13 * size, y=200)
 
-    #Buttons
-    seleccionarButton = tk.Button(screen, text = "Seleccionar una micro tarea")
-    seleccionarButton.config(command = partial(seleccionar, listaEnlazada, screen))
-    seleccionarButton.place(x = 13 * size, y = 200)
-
-    agregarButton = tk.Button(screen, text = "Agregar una micro tarea")
+    agregarButton = tk.Button(screen, text="Agregar una micro tarea")
     agregarButton.config(command=partial(agregar, listaEnlazada, screen))
     agregarButton.place(x=13 * size, y=400)
-
 
     screen.mainloop()
