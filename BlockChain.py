@@ -31,8 +31,12 @@ class MicroTarea:
     def setArchivos(archivos):
         self.archivos = archivos
     def toString(self):
-        print(self.nombre, self.empresa, self.descripcion, self.criterios,
-              self.recompensa, self.archivos)
+        print("Nombre: " + self.nombre,
+              "Empresa: " + self.empresa,
+              "Descripcion: " + self.descripcion,
+              "Criterios: " + self.criterios,
+              "Recompensa" + self.recompensa,
+              "Archivos: " + self.archivos)
     
 
 class Node:
@@ -103,6 +107,21 @@ class ListaEnlazadaDoble:
                 n.pref.nref = None
             else:
                 print("No encontro el elemento")
+
+    def toString(self):
+        if self.start_node is None:
+            print("La lista esta vacia")
+            return
+        elif self.start_node.nref is None:
+            print(self.start_node.toString())
+            return
+        else:
+            n = self.start_node
+            while n is not None:
+                test = n.microtarea
+                print(n.microtarea.toString(), n.prosumer)
+                n = n.nref
+            return
 
 class MicroTareaBlock:
     
