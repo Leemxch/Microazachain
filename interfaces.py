@@ -18,7 +18,7 @@ def seleccionar(lista, mainScreen):
     mainScreen.withdraw()
 
     seleccionar = tk.Tk()
-    seleccionar.title("Blockchain en micro tareas")  # TODO
+    seleccionar.title("Prototipo de blockchain en micro tareas")  # TODO
     seleccionar.geometry(str(290 + 25 * size) + "x" + str(70 + 25 * size))
     seleccionar.resizable(False, False)
 
@@ -70,7 +70,7 @@ def agregar(lista, mainScreen):
 
     # Main screen
     agregar = tk.Tk()
-    agregar.title("Blockchain en micro tareas")  # TODO
+    agregar.title("Prototipo de blockchain en micro tareas")  # TODO
     agregar.geometry(str(290 + 25 * size) + "x" + str(70 + 25 * size))
     agregar.resizable(False, False)
 
@@ -132,7 +132,7 @@ def start():
     )
     # Main screen
     screen = tk.Tk()
-    screen.title("Blockchain en micro tareas")  # TODO
+    screen.title("Prototipo de blockchain en micro tareas")  # TODO
     screen.geometry(str(290 + 25 * size) + "x" + str(70 + 25 * size))
     screen.resizable(False, False)
 
