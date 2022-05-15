@@ -1,6 +1,7 @@
 from BlockChain import *
+from tkinter import messagebox
 
-def createMicroTask(task, lista, prosumer, estado = "En proceso"):
+def createMicroTask(task, lista, prosumer, estado = "Disponible"):
     microTarea = MicroTarea(task[0].get(),
                             task[1].get(),
                             task[2].get(),
@@ -10,6 +11,7 @@ def createMicroTask(task, lista, prosumer, estado = "En proceso"):
 
     lista.insertar_fin(microTarea, estado, prosumer)
     lista.toString()
+    messagebox.showinfo(message = task[0].get(), title = "Se ha publicado con éxito")
 
 def mostrarSiguiente(screen, lista):
     print()
