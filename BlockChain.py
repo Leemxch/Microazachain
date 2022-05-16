@@ -60,6 +60,24 @@ class Node:
         self.nref = None
         self.pref = None
 
+    def getMicrotarea(self):
+        return self.microtarea
+
+    def getEstado(self):
+        return self.estado
+
+    def setEstado(self, estado):
+        self.estado = estado
+
+    def getProsumer(self):
+        return self.prosumer
+
+    def getNref(self):
+        return self.nref
+
+    def getPref(self):
+        return self.pref
+
 
 class ListaEnlazadaDoble:
 
@@ -140,6 +158,9 @@ class ListaEnlazadaDoble:
                 print(n.microtarea.toString(), n.prosumer)
                 n = n.nref
             return
+
+    def getNode(self):
+        return self.start_node
 
 
 class MicroTareaBlock:

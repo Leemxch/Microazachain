@@ -4,7 +4,13 @@ from BlockChain import *
 from logic import *
 
 size = 30
-
+listaEnlazada = ListaEnlazadaDoble()
+listaEnlazada.insertar_inicio(
+    MicroTarea("Nombre", "Empresa", "Descripcion", "Criterios", "Recompensa", "Links de los archivos"),
+    "Genesis",
+    "Genesis"
+)
+node = listaEnlazada.getNode()
 
 def showHide(show, hide, state=0):
     if state == 1:
@@ -13,8 +19,18 @@ def showHide(show, hide, state=0):
     show.withdraw()
     hide.deiconify()
 
+def save(estado, conjunto):
+    global node
+    node = verify(conjunto, estado, node)
+    check = node.getMicrotarea()
+    print(check.getNombre())
 
-def seleccionar(lista, mainScreen):
+def seleccionar(mainScreen):
+    global node, listaEnlazada
+    micro = node.getMicrotarea()
+
+
+    #Screen
     mainScreen.withdraw()
 
     seleccionar = tk.Tk()
@@ -26,17 +42,17 @@ def seleccionar(lista, mainScreen):
     titleLabel = tk.Label(seleccionar, text="Buscar una microtarea")
     titleLabel.place(x=30 * (int(size / 2)), y=10)
 
-    agregarNombreLabel = tk.Label(seleccionar, text="Nombre")
+    agregarNombreLabel = tk.Label(seleccionar, text= micro.getNombre())
     agregarNombreLabel.place(x=5 * size, y=50)
-    agregarEmpresaLabel = tk.Label(seleccionar, text="Empresa")
+    agregarEmpresaLabel = tk.Label(seleccionar, text= micro.getEmpresa())
     agregarEmpresaLabel.place(x=5 * size, y=100)
-    agregarDescripcionLabel = tk.Label(seleccionar, text="Descripcion")
+    agregarDescripcionLabel = tk.Label(seleccionar, text= micro.getDescripcion())
     agregarDescripcionLabel.place(x=5 * size, y=150)
-    agregarCriteriosLabel = tk.Label(seleccionar, text="Criterios")
+    agregarCriteriosLabel = tk.Label(seleccionar, text= micro.getCriterios())
     agregarCriteriosLabel.place(x=5 * size, y=200)
-    agregarRecompensaLabel = tk.Label(seleccionar, text="Recompensa")
+    agregarRecompensaLabel = tk.Label(seleccionar, text= micro.getRecompensa())
     agregarRecompensaLabel.place(x=5 * size, y=250)
-    agregarArchivosLabel = tk.Label(seleccionar, text="Link de los archivos")
+    agregarArchivosLabel = tk.Label(seleccionar, text= micro.getArchivos())
     agregarArchivosLabel.place(x=5 * size, y=300)
 
     conjunto = [agregarNombreLabel,
@@ -45,13 +61,14 @@ def seleccionar(lista, mainScreen):
                 agregarCriteriosLabel,
                 agregarRecompensaLabel,
                 agregarArchivosLabel]
+
     # Button
     anterior = tk.Button(seleccionar, text="Anterior")
-    anterior.config(command=partial(print))
+    anterior.config(command=partial(save, 0, conjunto))
     anterior.place(x=5 * size, y=350)
 
     siguiente = tk.Button(seleccionar, text="Siguiente")
-    siguiente.config(command=partial(mostrarSiguiente, agregar, conjunto))
+    siguiente.config(command=partial(save, 1, conjunto))
     siguiente.place(x=10 * size, y=350)
 
     reclamar = tk.Button(seleccionar, text="Reclamar")
@@ -66,7 +83,6 @@ def seleccionar(lista, mainScreen):
 
 def agregar(lista, mainScreen):
     mainScreen.withdraw()
-    prosumer = "Max"
 
     # Main screen
     agregar = tk.Tk()
@@ -113,8 +129,7 @@ def agregar(lista, mainScreen):
                                                            microCriteriosEntry,
                                                            microRecompensaEntry,
                                                            microArchivosEntry],
-                                         lista,
-                                         prosumer))
+                                         lista))
     publicarMicro.place(x=5 * size, y=350)
     volverMain = tk.Button(agregar, text="Volver")
     volverMain.place(x=5 * size, y=25*size)
@@ -124,12 +139,7 @@ def agregar(lista, mainScreen):
 
 
 def start():
-    listaEnlazada = ListaEnlazadaDoble()
-    listaEnlazada.insertar_inicio(
-        MicroTarea("Genesis", "Genesis", "Genesis", "Genesis", "Genesis", "Genesis"),
-        "Genesis",
-        "Genesis"
-    )
+    global listaEnlazada
     # Main screen
     screen = tk.Tk()
     screen.title("Prototipo de blockchain en micro tareas")  # TODO
@@ -142,7 +152,7 @@ def start():
 
     # Buttons
     seleccionarButton = tk.Button(screen, text="Seleccionar una micro tarea")
-    seleccionarButton.config(command=partial(seleccionar, listaEnlazada, screen))
+    seleccionarButton.config(command=partial(seleccionar, screen))
     seleccionarButton.place(x=13 * size, y=200)
 
     agregarButton = tk.Button(screen, text="Agregar una micro tarea")
