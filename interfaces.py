@@ -90,7 +90,9 @@ def seleccionar(mainScreen):
     seleccionar.mainloop()
 
 
-def agregar(lista, mainScreen):
+def agregar(mainScreen):
+    global listaEnlazada
+    lista = listaEnlazada
     mainScreen.withdraw()
 
     # Main screen
@@ -146,6 +148,46 @@ def agregar(lista, mainScreen):
 
     agregar.mainloop()
 
+def publicar(mainScreen):
+    global listaEnlazada, prosumer
+    mainScreen.withdraw()
+
+    labelsNames = publicarTarea(listaEnlazada, prosumer)
+    # Screen
+    publicarScreen = tk.Tk()
+    publicarScreen.title("Prototipo de blockchain en micro tareas")  # TODO
+    publicarScreen.geometry(str(290 + 25 * size) + "x" + str(70 + 25 * size))
+    publicarScreen.resizable(False, False)
+
+    # Labels
+    titleLabel = tk.Label(publicarScreen, text="Publicar una solución de microtarea")
+    titleLabel.place(x=30 * (int(size / 2)), y=10)
+
+    publicarNombreLabel = tk.Label(publicarScreen, text=labelsNames[0])
+    publicarNombreLabel.place(x=5 * size, y=50)
+    publicarEmpresaLabel = tk.Label(publicarScreen, text=labelsNames[1])
+    publicarEmpresaLabel.place(x=5 * size, y=100)
+    publicarDescripcionLabel = tk.Label(publicarScreen, text=labelsNames[2])
+    publicarDescripcionLabel.place(x=5 * size, y=150)
+    publicarCriteriosLabel = tk.Label(publicarScreen, text=labelsNames[3])
+    publicarCriteriosLabel.place(x=5 * size, y=200)
+    publicarRecompensaLabel = tk.Label(publicarScreen, text=labelsNames[4])
+    publicarRecompensaLabel.place(x=5 * size, y=250)
+    publicarArchivosLabel = tk.Label(publicarScreen, text=labelsNames[5])
+    publicarArchivosLabel.place(x=5 * size, y=300)
+
+    # Button
+    publicar = tk.Button(publicarScreen, text="Publicar solución")
+    publicar.config(command=partial(print, "wii "))
+    publicar.place(x=5 * size, y=350)
+
+
+    volverMainSel = tk.Button(publicarScreen, text="Volver")
+    volverMainSel.place(x=5 * size, y=25 * size)
+    volverMainSel.config(command=partial(showHide, publicarScreen, mainScreen, 1))
+
+    publicarScreen.mainloop()
+
 
 def start():
     global listaEnlazada
@@ -165,7 +207,11 @@ def start():
     seleccionarButton.place(x=13 * size, y=200)
 
     agregarButton = tk.Button(screen, text="Agregar una micro tarea")
-    agregarButton.config(command=partial(agregar, listaEnlazada, screen))
+    agregarButton.config(command=partial(agregar, screen))
     agregarButton.place(x=13 * size, y=400)
+
+    solucionButton = tk.Button(screen, text="Publicar una solucion")
+    solucionButton.config(command=partial(publicar, screen))
+    solucionButton.place(x=13 * size, y=600)
 
     screen.mainloop()

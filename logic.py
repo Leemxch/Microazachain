@@ -138,3 +138,26 @@ def rotar(lista, node):
     lista[4].config(text=micro.getRecompensa())
     lista[5].config(text=micro.getArchivos())
     return node
+
+def publicarTarea(lista, prosumer):
+    node = lista.getNode()
+    while node.getNref() is not None:
+        if node.getProsumer() == prosumer:
+            datos = node.getMicrotarea()
+            return [datos.getNombre(),
+                    datos.getEmpresa(),
+                    datos.getDescripcion(),
+                    datos.getCriterios(),
+                    datos.getRecompensa(),
+                    datos.getArchivos()
+
+            ]
+        node = node.getNref()
+    messagebox.showerror(title="Error", message="No hay micro tareas reclamadas")
+    return ["No hay reclamadas",
+            "No hay reclamadas",
+            "No hay reclamadas",
+            "No hay reclamadas",
+            "No hay reclamadas",
+            "No hay reclamadas"
+            ]
