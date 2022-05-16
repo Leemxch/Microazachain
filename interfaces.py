@@ -13,12 +13,14 @@ listaEnlazada.insertar_inicio(
 node = listaEnlazada.getNode()
 prosumer = "Max"
 
+
 def showHide(show, hide, state=0):
     if state == 1:
         hide.withdraw()
         show.deiconify()
     show.withdraw()
     hide.deiconify()
+
 
 def save(estado, conjunto):
     global node, prosumer
@@ -31,12 +33,12 @@ def save(estado, conjunto):
         check = node.getMicrotarea()
         print(check.getNombre())
 
+
 def seleccionar(mainScreen):
     global node, listaEnlazada, prosumer
     micro = node.getMicrotarea()
 
-
-    #Screen
+    # Screen
     mainScreen.withdraw()
 
     seleccionar = tk.Tk()
@@ -48,17 +50,17 @@ def seleccionar(mainScreen):
     titleLabel = tk.Label(seleccionar, text="Buscar una microtarea")
     titleLabel.place(x=30 * (int(size / 2)), y=10)
 
-    agregarNombreLabel = tk.Label(seleccionar, text= micro.getNombre())
+    agregarNombreLabel = tk.Label(seleccionar, text=micro.getNombre())
     agregarNombreLabel.place(x=5 * size, y=50)
-    agregarEmpresaLabel = tk.Label(seleccionar, text= micro.getEmpresa())
+    agregarEmpresaLabel = tk.Label(seleccionar, text=micro.getEmpresa())
     agregarEmpresaLabel.place(x=5 * size, y=100)
-    agregarDescripcionLabel = tk.Label(seleccionar, text= micro.getDescripcion())
+    agregarDescripcionLabel = tk.Label(seleccionar, text=micro.getDescripcion())
     agregarDescripcionLabel.place(x=5 * size, y=150)
-    agregarCriteriosLabel = tk.Label(seleccionar, text= micro.getCriterios())
+    agregarCriteriosLabel = tk.Label(seleccionar, text=micro.getCriterios())
     agregarCriteriosLabel.place(x=5 * size, y=200)
-    agregarRecompensaLabel = tk.Label(seleccionar, text= micro.getRecompensa())
+    agregarRecompensaLabel = tk.Label(seleccionar, text=micro.getRecompensa())
     agregarRecompensaLabel.place(x=5 * size, y=250)
-    agregarArchivosLabel = tk.Label(seleccionar, text= micro.getArchivos())
+    agregarArchivosLabel = tk.Label(seleccionar, text=micro.getArchivos())
     agregarArchivosLabel.place(x=5 * size, y=300)
 
     conjunto = [agregarNombreLabel,
@@ -86,6 +88,7 @@ def seleccionar(mainScreen):
     volverMainSel.config(command=partial(showHide, seleccionar, mainScreen, 1))
 
     seleccionar.mainloop()
+
 
 def agregar(lista, mainScreen):
     mainScreen.withdraw()
@@ -138,7 +141,7 @@ def agregar(lista, mainScreen):
                                          lista))
     publicarMicro.place(x=5 * size, y=350)
     volverMain = tk.Button(agregar, text="Volver")
-    volverMain.place(x=5 * size, y=25*size)
+    volverMain.place(x=5 * size, y=25 * size)
     volverMain.config(command=partial(showHide, agregar, mainScreen, 1))
 
     agregar.mainloop()
