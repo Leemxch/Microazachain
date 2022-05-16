@@ -27,12 +27,8 @@ def save(estado, conjunto):
     global node, prosumer
     if estado == 2:
         node = reclamarTarea(conjunto, node, prosumer)
-        check = node.getMicrotarea()
-        print(check.getNombre())
     elif estado == 1 or estado == 0:
         node = verify(conjunto, estado, node)
-        check = node.getMicrotarea()
-        print(check.getNombre())
 
 
 def seleccionar(mainScreen):
