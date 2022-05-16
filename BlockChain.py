@@ -81,6 +81,9 @@ class Node:
     def getPref(self):
         return self.pref
 
+    def toString(self):
+        print(self.microtarea.getNombre(), self.estado, self.prosumer)
+
 
 class ListaEnlazadaDoble:
 

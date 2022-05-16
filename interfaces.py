@@ -21,10 +21,15 @@ def showHide(show, hide, state=0):
     hide.deiconify()
 
 def save(estado, conjunto):
-    global node
-    node = verify(conjunto, estado, node)
-    check = node.getMicrotarea()
-    print(check.getNombre())
+    global node, prosumer
+    if estado == 2:
+        node = reclamarTarea(conjunto, node, prosumer)
+        check = node.getMicrotarea()
+        print(check.getNombre())
+    elif estado == 1 or estado == 0:
+        node = verify(conjunto, estado, node)
+        check = node.getMicrotarea()
+        print(check.getNombre())
 
 def seleccionar(mainScreen):
     global node, listaEnlazada, prosumer
@@ -73,7 +78,7 @@ def seleccionar(mainScreen):
     siguiente.place(x=10 * size, y=350)
 
     reclamar = tk.Button(seleccionar, text="Reclamar")
-    reclamar.config(command=partial(reclamarTarea, conjunto, node, prosumer))
+    reclamar.config(command=partial(save, 2, conjunto))
     reclamar.place(x=15 * size, y=350)
 
     volverMainSel = tk.Button(seleccionar, text="Volver")
