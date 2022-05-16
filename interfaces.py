@@ -12,6 +12,7 @@ listaEnlazada.insertar_inicio(
 )
 node = listaEnlazada.getNode()
 prosumer = "Max"
+blockchain = Blockchain()
 
 
 def showHide(show, hide, state=0):
@@ -149,7 +150,7 @@ def agregar(mainScreen):
     agregar.mainloop()
 
 def publicar(mainScreen):
-    global listaEnlazada, prosumer
+    global listaEnlazada, prosumer, blockchain
     mainScreen.withdraw()
 
     labelsNames = publicarTarea(listaEnlazada, prosumer)
@@ -163,22 +164,22 @@ def publicar(mainScreen):
     titleLabel = tk.Label(publicarScreen, text="Publicar una solución de microtarea")
     titleLabel.place(x=30 * (int(size / 2)), y=10)
 
-    publicarNombreLabel = tk.Label(publicarScreen, text=labelsNames[0])
+    publicarNombreLabel = tk.Label(publicarScreen, text=labelsNames[1])
     publicarNombreLabel.place(x=5 * size, y=50)
-    publicarEmpresaLabel = tk.Label(publicarScreen, text=labelsNames[1])
+    publicarEmpresaLabel = tk.Label(publicarScreen, text=labelsNames[2])
     publicarEmpresaLabel.place(x=5 * size, y=100)
-    publicarDescripcionLabel = tk.Label(publicarScreen, text=labelsNames[2])
+    publicarDescripcionLabel = tk.Label(publicarScreen, text=labelsNames[3])
     publicarDescripcionLabel.place(x=5 * size, y=150)
-    publicarCriteriosLabel = tk.Label(publicarScreen, text=labelsNames[3])
+    publicarCriteriosLabel = tk.Label(publicarScreen, text=labelsNames[4])
     publicarCriteriosLabel.place(x=5 * size, y=200)
-    publicarRecompensaLabel = tk.Label(publicarScreen, text=labelsNames[4])
+    publicarRecompensaLabel = tk.Label(publicarScreen, text=labelsNames[5])
     publicarRecompensaLabel.place(x=5 * size, y=250)
-    publicarArchivosLabel = tk.Label(publicarScreen, text=labelsNames[5])
+    publicarArchivosLabel = tk.Label(publicarScreen, text=labelsNames[6])
     publicarArchivosLabel.place(x=5 * size, y=300)
 
     # Button
     publicar = tk.Button(publicarScreen, text="Publicar solución")
-    publicar.config(command=partial(print, "wii "))
+    publicar.config(command=partial(eliminarDeLista, listaEnlazada, labelsNames[0], blockchain))
     publicar.place(x=5 * size, y=350)
 
 

@@ -144,7 +144,8 @@ def publicarTarea(lista, prosumer):
     while node.getNref() is not None:
         if node.getProsumer() == prosumer:
             datos = node.getMicrotarea()
-            return [datos.getNombre(),
+            return [node,
+                    datos.getNombre(),
                     datos.getEmpresa(),
                     datos.getDescripcion(),
                     datos.getCriterios(),
@@ -154,10 +155,17 @@ def publicarTarea(lista, prosumer):
             ]
         node = node.getNref()
     messagebox.showerror(title="Error", message="No hay micro tareas reclamadas")
-    return ["No hay reclamadas",
+    return ["",
+            "No hay reclamadas",
             "No hay reclamadas",
             "No hay reclamadas",
             "No hay reclamadas",
             "No hay reclamadas",
             "No hay reclamadas"
             ]
+
+def eliminarDeLista(lista, node, block):
+    eliminar = node.getMicrotarea()
+    #lista.borrar_por_elemento(eliminar)
+    block.create_block(eliminar, "Finalizado", node.getProsumer())
+    block.display_chain()
