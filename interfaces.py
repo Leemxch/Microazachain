@@ -3,7 +3,7 @@ from functools import partial
 from BlockChain import *
 from logic import *
 
-size = 30
+size = 20
 listaEnlazada = ListaEnlazadaDoble()
 listaEnlazada.insertar_inicio(
     MicroTarea("Nombre", "Empresa", "Descripcion", "Criterios", "Recompensa", "Links de los archivos"),
@@ -95,42 +95,43 @@ def agregar(mainScreen):
     # Main screen
     agregar = tk.Tk()
     agregar.title("Prototipo de blockchain en micro tareas")  # TODO
-    agregar.geometry(str(290 + 25 * size) + "x" + str(70 + 25 * size))
+    agregar.geometry(str(250 + 20 * size) + "x" + str(70 + 25 * size))
     agregar.resizable(False, False)
+    agregar.configure(bg="#27242A")
 
     # Labels
-    titleLabel = tk.Label(agregar, text="Agregar una nueva microtarea")
-    titleLabel.place(x=30 * (int(size / 2)), y=10)
+    titleLabel = tk.Label(agregar, text="Agregar una nueva microtarea",font=("Bold",20),fg="#00FF9F",bg="#27242A")
+    titleLabel.place(x=13 * (int(size / 2)), y=10)
 
-    microNombreLabel = tk.Label(agregar, text="Nombre")
-    microNombreLabel.place(x=5 * size, y=50)
-    microEmpresaLabel = tk.Label(agregar, text="Empresa")
-    microEmpresaLabel.place(x=5 * size, y=100)
-    microDescripcionLabel = tk.Label(agregar, text="Descripcion")
-    microDescripcionLabel.place(x=5 * size, y=150)
-    microCriteriosLabel = tk.Label(agregar, text="Criterios")
-    microCriteriosLabel.place(x=5 * size, y=200)
-    microRecompensaLabel = tk.Label(agregar, text="Recompensa")
-    microRecompensaLabel.place(x=5 * size, y=250)
-    microArchivosLabel = tk.Label(agregar, text="Link de los archivos")
-    microArchivosLabel.place(x=5 * size, y=300)
+    microNombreLabel = tk.Label(agregar, text="Nombre",fg="#00FF9F",bg="#27242A")
+    microNombreLabel.place(x=4 * size, y=60)
+    microEmpresaLabel = tk.Label(agregar, text="Empresa",fg="#00FF9F",bg="#27242A")
+    microEmpresaLabel.place(x=4 * size, y=120)
+    microDescripcionLabel = tk.Label(agregar, text="Descripcion",fg="#00FF9F",bg="#27242A")
+    microDescripcionLabel.place(x=4 * size, y=180)
+    microCriteriosLabel = tk.Label(agregar, text="Criterios",fg="#00FF9F",bg="#27242A")
+    microCriteriosLabel.place(x=4 * size, y=240)
+    microRecompensaLabel = tk.Label(agregar, text="Recompensa",fg="#00FF9F",bg="#27242A")
+    microRecompensaLabel.place(x=4 * size, y=300)
+    microArchivosLabel = tk.Label(agregar, text="Link de los archivos",fg="#00FF9F",bg="#27242A")
+    microArchivosLabel.place(x=4 * size, y=360)
 
     # Entries
     microNombreEntry = tk.Entry(agregar, width=int(size * 4))
-    microNombreEntry.place(x=5 * size, y=70)
+    microNombreEntry.place(x=4 * size, y=90)
     microEmpresaEntry = tk.Entry(agregar, width=int(size * 4))
-    microEmpresaEntry.place(x=5 * size, y=120)
+    microEmpresaEntry.place(x=4 * size, y=150)
     microDescripcionEntry = tk.Entry(agregar, width=int(size * 4))
-    microDescripcionEntry.place(x=5 * size, y=170)
+    microDescripcionEntry.place(x=4 * size, y=210)
     microCriteriosEntry = tk.Entry(agregar, width=int(size * 4))
-    microCriteriosEntry.place(x=5 * size, y=220)
+    microCriteriosEntry.place(x=4 * size, y=270)
     microRecompensaEntry = tk.Entry(agregar, width=int(size * 4))
-    microRecompensaEntry.place(x=5 * size, y=270)
+    microRecompensaEntry.place(x=4 * size, y=330)
     microArchivosEntry = tk.Entry(agregar, width=int(size * 4))
-    microArchivosEntry.place(x=5 * size, y=320)
+    microArchivosEntry.place(x=4 * size, y=390)
 
     # Buttons
-    publicarMicro = tk.Button(agregar, text="Publicar")
+    publicarMicro = tk.Button(agregar, text="Publicar",bg="#00FF9F")
     publicarMicro.config(command=partial(createMicroTask, [microNombreEntry,
                                                            microEmpresaEntry,
                                                            microDescripcionEntry,
@@ -138,9 +139,9 @@ def agregar(mainScreen):
                                                            microRecompensaEntry,
                                                            microArchivosEntry],
                                          lista))
-    publicarMicro.place(x=5 * size, y=350)
-    volverMain = tk.Button(agregar, text="Volver")
-    volverMain.place(x=5 * size, y=25 * size)
+    publicarMicro.place(x=4 * size, y=420)
+    volverMain = tk.Button(agregar, text="Volver",bg="#FF8A6B")
+    volverMain.place(x=7.5 * size, y=420)
     volverMain.config(command=partial(showHide, agregar, mainScreen, 1))
 
     agregar.mainloop()
@@ -191,24 +192,27 @@ def start():
     # Main screen
     screen = tk.Tk()
     screen.title("Prototipo de blockchain en micro tareas")  # TODO
-    screen.geometry(str(290 + 25 * size) + "x" + str(70 + 25 * size))
+    screen.geometry(str(290 + 25 * size) + "x" + str(20 * size))
     screen.resizable(False, False)
+    screen.configure(bg="#27242A")
 
     # Labels
-    titleLabel = tk.Label(screen, text="Inicio")
-    titleLabel.place(x=30 * (int(size / 2)), y=10)
+    titleLabel = tk.Label(screen, text="Prueba de blockchain",font=("Bold",30),fg="#00FF9F",bg="#27242A")
+
+    titleLabel.place(x=20 * (int(size / 2)), y=10)
 
     # Buttons
-    seleccionarButton = tk.Button(screen, text="Seleccionar una micro tarea")
-    seleccionarButton.config(command=partial(seleccionar, screen))
-    seleccionarButton.place(x=13 * size, y=200)
 
     agregarButton = tk.Button(screen, text="Agregar una micro tarea")
-    agregarButton.config(command=partial(agregar, screen))
-    agregarButton.place(x=13 * size, y=400)
+    agregarButton.config(command=partial(agregar, screen),bg="#00FF9F",height= 2,width=25,font=("Arial",16) )
+    agregarButton.place(x=12 * size, y=100)
+
+    seleccionarButton = tk.Button(screen, text="Seleccionar una micro tarea")
+    seleccionarButton.config(command=partial(seleccionar, screen),bg="#00FF9F",height= 2,width=25,font=("Arial",16))
+    seleccionarButton.place(x=12 * size, y=200)
 
     solucionButton = tk.Button(screen, text="Publicar una solucion")
-    solucionButton.config(command=partial(publicar, screen))
-    solucionButton.place(x=13 * size, y=600)
+    solucionButton.config(command=partial(publicar, screen),bg="#00FF9F",height= 2,width=25,font=("Arial",16))
+    solucionButton.place(x=12 * size, y=300)
 
     screen.mainloop()
