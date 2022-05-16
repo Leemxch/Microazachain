@@ -16,32 +16,48 @@ def createMicroTask(task, lista, prosumer = "", estado = "Disponible"):
 def verify(lista, estado, node):
     if node.getEstado() == "Genesis":
         if (node.getNref() is None) and (node.getPref() is None):
-            print("No hay nada en los extremos")
-            messagebox.showerror(title="Error", message="No hay más micro tareas")
+            messagebox.showerror(title="Error", message="No hay micro tareas existentes")
             return node
         else:
             node.setEstado("Inmutable")
             return rotar(lista, node.getNref())
-    elif node.getEstado() != "Disponible":
-        if estado == 1:
-            return verify(lista, estado, node.getNref())
-        elif estado == 0:
-            return verify(lista, estado, node.getPref())
-    elif node.getEstado() == "Disponible":
+    elif node.getEstado() == "Disponible" or node.getEstado() == "Genesis":
         if estado == 1:
             if node.getNref() is None:
                 messagebox.showerror(title="Error", message="No hay más micro tareas siguiente")
-                print("No hay mas info")
                 return node
-            print("Hay otro nodo")
-            return rotar(lista, node.getNref())
-        else:
-            if node.getPref() is None:
+            else:
+                return rotar(lista, node.getNref())
+        elif estado == 0:
+            check = node.getPref()
+            if check.getEstado() == "Inmutable":
                 messagebox.showerror(title="Error", message="No hay más micro tareas anterior")
-                print("No hay mas info")
                 return node
-            print("Hay otro nodo")
-            return rotar (lista, node.getPref())
+            elif node.getPref() is None:
+                messagebox.showerror(title="Error", message="No hay más micro tareas anterior")
+                return node
+            elif check.getEstado() != "Inmutable":
+                return rotar (lista, node.getPref())
+    elif node.getEstado() != "Disponible" or node.getEstado != "Genesis":
+        if estado == 0 and node.getPref() is not None:
+            return verify(lista, estado, node.getPref())
+        elif estado == 1 and node.getNref() is not None:
+            return verify(lista, estado, node.getNref())
+
+def reclamarTarea(lista, node, prosumer):
+    node.setEstado("En desarrollo")
+    node.setProsumer(prosumer)
+    check1 = node.getNref()
+    check2 = node.getPref()
+    if  check1 is not None and check1.getEstado() == "Disponible":
+        print("reclamado sigue adelante")
+        return rotar(lista, node.getNref())
+    elif check2 is not None and check1.getEstado() == "Disponible":
+        print("reclamado sigue atras")
+        return rotar(lista,node.getPref())
+    else:
+        messagebox.showerror(title="Error", message="No hay micro tareas disponibles")
+        return node
 
 def rotar(lista, node):
     micro = node.getMicrotarea()
@@ -51,5 +67,4 @@ def rotar(lista, node):
     lista[3].config( text = micro.getCriterios())
     lista[4].config( text = micro.getRecompensa())
     lista[5].config( text = micro.getArchivos())
-
     return node

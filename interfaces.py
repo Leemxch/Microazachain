@@ -11,6 +11,7 @@ listaEnlazada.insertar_inicio(
     "Genesis"
 )
 node = listaEnlazada.getNode()
+prosumer = "Max"
 
 def showHide(show, hide, state=0):
     if state == 1:
@@ -26,7 +27,7 @@ def save(estado, conjunto):
     print(check.getNombre())
 
 def seleccionar(mainScreen):
-    global node, listaEnlazada
+    global node, listaEnlazada, prosumer
     micro = node.getMicrotarea()
 
 
@@ -72,7 +73,7 @@ def seleccionar(mainScreen):
     siguiente.place(x=10 * size, y=350)
 
     reclamar = tk.Button(seleccionar, text="Reclamar")
-    reclamar.config(command=partial(print))
+    reclamar.config(command=partial(reclamarTarea, conjunto, node, prosumer))
     reclamar.place(x=15 * size, y=350)
 
     volverMainSel = tk.Button(seleccionar, text="Volver")

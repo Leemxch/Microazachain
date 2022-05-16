@@ -72,6 +72,9 @@ class Node:
     def getProsumer(self):
         return self.prosumer
 
+    def setProsumer(self, prosumer):
+        self.prosumer = prosumer
+
     def getNref(self):
         return self.nref
 
