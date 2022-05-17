@@ -195,10 +195,11 @@ class Blockchain:
         self.chain.append(MicroTareaBlock(previous_block_hash, microtarea, estado, prosumer))
 
     def display_chain(self):
+        str = ""
         for i in range(1, len(self.chain)):
-            print(f"Data {i}: {self.chain[i].block_data}")
-            print(f"Hash {i}: {self.chain[i].block_hash}\n")
-            print()
+            str += f"Data {i}: {self.chain[i].block_data}"
+            str += f"Hash {i}: {self.chain[i].block_hash}\n"
+        return str
 
     def last_block(self):
         return self.chain[-1]

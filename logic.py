@@ -168,4 +168,5 @@ def eliminarDeLista(lista, node, block):
     eliminar = node.getMicrotarea()
     #lista.borrar_por_elemento(eliminar)
     block.create_block(eliminar, "Finalizado", node.getProsumer())
-    block.display_chain()
+    showText = block.display_chain()
+    messagebox.showinfo(title="Success!", message=showText)
